@@ -1,4 +1,5 @@
 <?php
+//this file will load the ingredients into an associative array
 
 if (($handle = fopen("uploads/ABBREV.csv", "r")) !== FALSE) {
    
@@ -21,10 +22,25 @@ if (($handle = fopen("uploads/ABBREV.csv", "r")) !== FALSE) {
 	
 	$i = 1;
 	
-	foreach($array as $ingredient) {
+
+	
+$username = 'kwilliams';
+$password = 'mongo1234';
+$connection = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
+
+
+$db = $connection->ingredients;
+$collection = $db->load2;
+	
+		foreach($array as $ingredient) {
 		$ingredients[$ingredient[1]]['info'] = array_combine($keys, $ingredient);
 		unset($ingredients[$ingredient[1]]['info']['Shrt_Desc']);
+	
 	}
+	
+	
+	
+	
 	
 	print_r($ingredients);	
 ?>

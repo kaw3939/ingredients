@@ -1,66 +1,76 @@
 <?php
+print_r($_REQUEST);
+//some basic mongo commands
+
 ini_set('display_errors', 'On');
+print_r($_GET);
+/*
+if (($handle = fopen("uploads/ABBREV.csv", "r")) !== FALSE) {
+   
+    while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
+        $num = count($data);
+        
+
+        	$array[] = $data;
+
+    
+    }
+    fclose($handle);
+	
+}
+	unset($array[0][53]);
+	
+	$keys = $array[0];
+	
+	unset($array[0]);
+	
+	$i = 1;
+
+/*
+	foreach($array as $ing_data) {
+		$ingredient = array_combine($keys, $ing_data);
+		
+		$collection->insert($ingredient);
+		print_r($ingredient);
+		//$ingredient[$ing_data[1]]['info'] = array_combine($keys, $ing_data);
+		//unset($ingredients[$ing_data[1]]['info']['Shrt_Desc']);
+		//$collection->insert($ingredients);
+		//print_r($ingredient);
+	}
+*/
 
 $username = 'kwilliams';
 $password = 'mongo1234';
 $connection = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
 
 
-$db = $connection->wha3f7sot;
-$collection = $db->evendssss;
+$db = $connection->ingredients;
 
+$collection = $db->load3;
+echo 'test';
 
-//print_r($obj);
+	foreach($cursor as $row) {
+		print_r($row);
+	}
 
+	if(isset($_GET['op'])) {
+		$id = $_GET['op'];
+		
+		$cursor = $collection->findOne(array('_id' => new MongoId($id)));	
 
-//$somearray = array('name' => 'keith','Last Name' => 'Williams', 'address' => '58 Clark Ct', 'country' => 'Brazil');
-
-
-
-$obj = new stdClass;
-$obj->name = 'keith';
-//$obj->color = 'black';
-$obj->color->shade[] = 'royal2';
-$obj->color->shade[] = 'ocean2';
-//$obj->color->shade[] = 'sky2';
-//$obj->color->shade[] = 'tur2';
-$collection->insert($obj);
-
-//$cursor = $collection->findOne(array('_id' => new MongoId('4ddbecc61ce31e340b000000')));
-//print_r($cursor);
-
-//$query = array("color" => array("shade" => "royal"));
-//$query = array("color" => array("shade" => array("royal2")));
-$query = array("name" => "keith23", "color.shade" => "sky2");
-$cursor = $collection->find($query);
-
-print_r($cursor);
-
-$i = 1;
-foreach($cursor as $object) {
-
-	$o->{'record'.$i} = (object) $object;
-	$i = $i + 1;
-}
-print_r($o);
-
-echo $o->record1->name;
-/*
-foreach ($cursor as $id => $record) {
-	echo $id . '</br>';
-	     foreach ($record as $field => $value) { 
-	     	if($field != '_id'){
-	     		echo $field . ': ' . $value;
-	     		echo '</br>';
-	     	}
-	     	if(is_array($value)){
-	     		foreach($value as $subkey => $subvalue) {
-	     			echo $subkey . ': ' . $subvalue;		
-	     		}
-	     	}
-	     }
-
-    echo '</p>';
-}
-*/
+		print_r($cursor);
+		
+		
+	}	else {
+		echo ' not set';
+		$cursor = $collection->find();
+		
+		foreach($cursor as $record) {	
+			$output = json_encode($record);
+			echo $output;
+		}
+	
+	}
+		
+	
 ?>
