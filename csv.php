@@ -32,9 +32,9 @@ $connection = new Mongo("mongodb://${username}:${password}@localhost/test",array
 
 $db = $connection->recipe;
 
-$collection = $db->ingredients2;
-$response = $collection->drop();
-$collection = $db->ingredients2;
+$collection = $db->ing2;
+//$response = $collection->drop();
+$collection = $db->stuff;
 /*	
 		foreach($array as $ingredient) {
 		$ingredients[$ingredient[1]]['info'] = array_combine($keys, $ingredient);
@@ -44,9 +44,6 @@ $collection = $db->ingredients2;
 	
 */	
 	
-	
-	
-
 	foreach($array as $ingredient) {
 		
 		$short_desc = explode(',',$ingredient[2]);

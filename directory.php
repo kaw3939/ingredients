@@ -5,11 +5,14 @@
 	$connection = new Mongo("mongodb://${username}:${password}@localhost/test",array("persist" => "x"));
 
 
-	$db = $connection->recipe;
-	$collection = $db->ingredients2;
-	$collection->ensureIndex(array('Category' => 1));
+	$collection = $db->ing2;
+	//$response = $collection->drop();
+	$collection = $db->stuff;
+	//$collection->ensureIndex(array('Category' => 1));
 	//$cursor = $db->command(array("distinct" => "ingredients2", "key" => "Shrt_Desc.title"));	
-	$cursor = $db->command(array("distinct" => "ingredients2", "key" => "Category"));		
+	$cursor = $db->command(array("distinct" => "ing2", "key" => "Shrt_Desc.title"));		
+	
+	/*
 	foreach($cursor as $title) {
 		foreach($title as $key => $value) {
 				
@@ -104,6 +107,6 @@
 		return $value;
 	}
 	
-	
+	*/
 	
 ?>
